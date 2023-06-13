@@ -1,0 +1,131 @@
+html, body {
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: rgb(240, 241, 252);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #003366;
+  padding: 1%;
+}
+
+.logo-container {
+  display: flex;
+}
+
+.logo-container img {
+  width: 70%;
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+}
+
+nav h1 {
+  display: flex;
+}
+
+nav a {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-right: 20px; /* Aumentar margen derecho */
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: rgb(37, 145, 233);
+  cursor: pointer;
+  border-radius: 2%;
+  opacity: 70%;
+}
+
+nav a i {
+  margin-right: 5%;
+}
+
+/* Estilos para la sección de categorías */
+.container-fluid {
+  padding: 2.6% 0;
+  background-color: rgb(242, 240, 255);
+}
+
+.container-fluid-1 {
+  padding: 2.6% 0;
+  background-color: rgb(248, 248, 250);
+}
+
+/* Estilos para los botones de las categorías */
+.btn {
+  color: #fff;
+  text-align: left;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn h4 {
+  font-size: 1.6vw;
+  margin-bottom: 1.5%;
+}
+
+.btn p {
+  font-size: 1.4vw;
+  text-align: justify;
+}
+
+.card-body p {
+  text-align: justify;
+}
+
+.btn:hover {
+  box-shadow: 0px 0px 0.5vw rgba(0, 0, 0, 0.5);
+  transform: translateY(-1.3%);
+}
+
+/* Estilos para el fondo de los botones */
+.bg-image {
+  background: url("../img/danzas.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-image-1 {
+  background: url("../img/musica.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-image-2 {
+  background: url("../img/artes.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-image-3 {
+  background: url("../img/deportes.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-image-4 {
+  background: url("../img/porras.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-image-5 {
+  background: url("../img/artes_marciales.png");
+  background-size: cover;
+  background-position: center;
+}
