@@ -21,6 +21,44 @@ header {
   width: 70%;
 }
 
+/* Estilos para la ventana modal */
+.modal-wrapper {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.modal-wrapper.active {
+  display: block;
+}
+
+.modal-contenido {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-cerrar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #aaa;
+  text-decoration: none;
+}
+
+.modal-cerrar:hover {
+  color: #555;
+}
 
 nav {
   display: flex;
@@ -129,3 +167,4 @@ nav a i {
   background-size: cover;
   background-position: center;
 }
+

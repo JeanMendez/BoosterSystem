@@ -1,3 +1,13 @@
+<?php include_once 'includes/verificarAcceso.php'; ?>
+<?php
+// Consultar las calificaciones desde la base de datos con los nombres de estudiante y asignatura
+$sql = "SELECT calificaciones.idCalificaciones, calificaciones.puntaje, estudiante.nombresEstudiante, asignaturas.nombreAsignatura 
+        FROM calificaciones 
+        INNER JOIN estudiante ON calificaciones.estudiante_idEstudiante = estudiante.idEstudiante 
+        INNER JOIN asignaturas ON calificaciones.asignaturas_idAsignatura = asignaturas.idAsignatura";
+$result = $conexion->query($sql);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,85 +36,45 @@
    <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
     
-    <?php include_once './templates/cabecera.php'; ?>
-    <?php include_once './templates/menu.php'; ?>
+    <?php include_once '../templates/cabecera.php'; ?>
+    <?php include_once '../templates/menu.php'; ?>
 
-    <!--Contenido-->
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+<div class="content-wrapper">
 
         <!-- Main content -->
         <section class="content">
 
             <section class="estilo">
-                <h2>Consultar y registrar notas</h2>
-                <div class="filtros">
-                  <label for="input-nombre"></label>
-                  <input type="text" id="input-nombre" placeholder="N° identidad">
-                  <select id="select-ano">
-                    <option value="">Año lectivo</option>
-                    <option value="2020-2021">2020-2021</option>
-                    <option value="2021-2022">2021-2022</option>
-                    <option value="2022-2023">2022-2023</option>
-                   </select>
-                  <button id="btn-buscar">Buscar</button>
-                </div>
-                <div class="tabla">
-                  <h3>Alumno</h3>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Número documento</th>
-                        <th>Curso</th>
-                        <th>Periodo</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Juan</td>
-                        <td>Pérez</td>
-                        <td>123456789</td>
-                        <td>Segundo</td>
-                        <td>2</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="tabla">
-                  <h3>Tabla de notas por materia</h3>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Materia</th>
-                        <th>Nota</th>
-                        <th>Desempeño</th>
-                        <th>Acciones</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Matemáticas</td>
-                        <td>4.5</td>
-                        <td>Bueno</td>
-                        <td><a href="editarNotas.php" class="btn-editar">Editar</a></td>
-                      </tr>
-                      <tr>
-                        <td>Ciencias</td>
-                        <td>3.0</td>
-                        <td>Regular</td>
-                        <td><a href="editarNotas.php" class="btn-editar">Editar</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </section>         
+            <h1>Lista de Calificaciones</h1>
+
+    <a href="agregar_calificacion.php">Agregar Calificación</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Puntaje</th>
+            <th>Estudiante</th>
+            <th>Asignatura</th>
+            <th>Acciones</th>
+        </tr>
+        <?php while ($row = $result->fetch_assoc()) : ?>
+        <tr>
+            <td><?php echo $row['idCalificaciones']; ?></td>
+            <td><?php echo $row['puntaje']; ?></td>
+            <td><?php echo $row['nombresEstudiante']; ?></td>
+            <td><?php echo $row['nombreAsignatura']; ?></td>
+            <td>
+                <a href="views/editar_calificacion.php?id=<?php echo $row['idCalificaciones']; ?>">Editar</a>
+                <a href="views/eliminar_calificacion.php?id=<?php echo $row['idCalificaciones']; ?>">Eliminar</a>
+            </td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+              </section>        
   </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 
-
-<?php include_once './templates/pie.php'; ?>
+<?php include_once '../templates/pie.php'; ?>
 
 <!-- jQuery 2.1.4 -->
 <script src="../Layout/js/jQuery-2.1.4.min.js"></script>

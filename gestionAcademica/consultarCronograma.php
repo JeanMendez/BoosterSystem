@@ -1,60 +1,99 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
+  <title>Title</title>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Instituto Gerardo Valencia Cano</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.5 -->
-  <link rel="stylesheet" href="../Layout/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../Layout/css/font-awesome.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../Layout/css/AdminLTE.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link rel="stylesheet" href="css/stilos.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-     folder instead of downloading all of them to reduce the load. -->
-     <link rel="stylesheet" href="../Layout/css/_all-skins.min.css">
-     <link rel="apple-touch-icon" href="../Layout/img/apple-touch-icon.png">
-     <link rel="shortcut icon" href="../Imagenes/logo.png">
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
-     <script src="../js/alerta.js"></script>
+</head>
 
-   </head>
-   <body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
-    
-    <?php include_once './templates/cabecera.php'; ?>
-    <?php include_once './templates/menu.php'; ?>
+<body>
+  <header>
 
-<!--Contenido-->
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+  </header>
+  <main class="container">
 
-        <!-- Main content -->
-        <section class="content">
+    <br>
+    <div class="card">
+      <div class="card-header">
+        <h4>Cronograma</h4>
+        <br>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive-sm">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Titulo</th>
+                <th scope="col">Portada</th>
+                <th scope="col">PDF</th>
 
-            <section class="estilo">
-                <h2>Cronograma Académico</h2>
-                <hr style="border: 1px solid gray;">
-                <img class = "filtros" src="../Imagenes/cronograma.jpg" alt="Imagen del cronograma académico">
-                <a href="ruta/al/archivo.pdf" download>Descargar cronograma académico</a>
-              </section>
-            
-  </section><!-- /.content -->
-</div><!-- /.content-wrapper -->
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              // Conexión a la base de datos
+              $conexion = mysqli_connect('localhost', 'root', '', 'boostersystem');
 
+              // Verificar si la conexión fue exitosa
+              if (!$conexion) {
+                die('Error de conexión a la base de datos: ' . mysqli_connect_error());
+              }
 
-<?php include_once './templates/pie.php'; ?>
+              // Consulta SQL para obtener los registros del cronograma
+              $sql = "SELECT * FROM cronograma";
 
-<!-- jQuery 2.1.4 -->
-<script src="../Layout/js/jQuery-2.1.4.min.js"></script>
-<!-- Bootstrap 3.3.5 -->
-<script src="../Layout/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../Layout/js/app.min.js"></script>
+              // Ejecutar la consulta
+              $resultado = mysqli_query($conexion, $sql);
+
+              // Comprobar si se encontraron registros
+              if (mysqli_num_rows($resultado) > 0) {
+                // Generar las filas de la tabla con los datos recuperados
+                while ($row = mysqli_fetch_assoc($resultado)) {
+                  echo '<tr>';
+                  echo '<td>' . $row['titulo'] . '</td>';
+                  echo '<td><img src="cronograma/' . $row['portada'] . '" alt="Portada" width="50"></td>';
+                  echo '<td><a href="cronograma/' . $row['archivo'] . '" target="_blank">Ver/Descargar</a></td>';
+                  echo '<td>';
+                  echo '</tr>';
+
+                
+                }
+              } else {
+                // No se encontraron registros
+                echo '<tr><td colspan="4">No se encontraron registros en el cronograma</td></tr>';
+              }
+
+             
+              mysqli_close($conexion);
+              ?>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
 
 </body>
+
 </html>

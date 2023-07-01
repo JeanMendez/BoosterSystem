@@ -1,0 +1,81 @@
+body {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  p {
+    font-size: 18px;
+    color: white;
+}
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    color: white;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  table tr:first-child {
+    background-color: black;
+    color: #fff
+  }
+  
+  
+  .contract-bg {
+    min-height: 300px;
+    width: 100%;
+    padding: 20px;
+
+    background: linear-gradient(to bottom, #003366, #23356e);
+}
+
+  
+  .contract-bg .wrapper {
+    padding-top: 20px;
+    padding-left: 58px;
+    
+  }
+  
+  .contract-bg p {
+    line-height: 1.2;
+  }
+  
+  @media only screen and (max-width: 800px) {
+  
+  .contract-bg {
+    max-height: 500px;
+    max-width: 760px;
+    padding-top: 248px;
+    margin-top: -74px;
+  }
+  
+  .contract-bg .wrapper {
+    padding-top: 20px;
+  }
+  
+  .contract-bg p {
+    font-size: 12px;
+  }
+    
+  table {
+    border-collapse: collapse;
+    width: auto;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  table tr:first-child {
+    background-color: black;
+    color: #fff
+  }
+  }

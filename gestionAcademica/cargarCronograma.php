@@ -1,3 +1,4 @@
+<?php include_once 'includes/verificarAcceso.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,8 +27,8 @@
    <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
     
-    <?php include_once './templates/cabecera.php'; ?>
-    <?php include_once './templates/menu.php'; ?>
+    <?php include_once '../templates/cabecera.php'; ?>
+    <?php include_once '../templates/menu.php'; ?>
 
 <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
@@ -40,7 +41,7 @@
                 <h2>Subir Cronograma Académico</h2>
                 <hr style="border: 1px solid gray;">
                 <div class="filtros">
-                <form>
+                <form action="" method="POST" >
 
                   <div class="form-group">
                     <label for="input-archivo">Archivo:</label>
@@ -55,7 +56,7 @@
   </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 
-<?php include_once './templates/pie.php'; ?>
+<?php include_once '../templates/pie.php'; ?>
 
 <!-- jQuery 2.1.4 -->
 <script src="../Layout/js/jQuery-2.1.4.min.js"></script>

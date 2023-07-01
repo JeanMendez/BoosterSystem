@@ -1,3 +1,4 @@
+<?php include_once '../includes/verificarAcceso.php'; ?>
 <?php
 $idUsuario = $_GET['id'];
 $conexion = mysqli_connect("localhost", "root", "", "boostersystem");
@@ -10,7 +11,9 @@ if (!$usuario) {
     // Manejar el caso de usuario no encontrado, redireccionar o mostrar un mensaje de error
     exit("El usuario no existe");
 }
-?>
+
+    ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -32,7 +35,7 @@ if (!$usuario) {
      folder instead of downloading all of them to reduce the load. -->
      <link rel="stylesheet" href="../../Layout/css/_all-skins.min.css">
      <link rel="apple-touch-icon" href="../../Layout/img/apple-touch-icon.png">
-     <link rel="shortcut icon" href="../../Imagenes/logo.png">
+     <link rel="shortcut icon" href="../../img/logo.png">
 
      <script src="../js/alerta.js"></script>
 
@@ -40,67 +43,112 @@ if (!$usuario) {
    <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
     
-    <?php include_once '../templates/cabecera.php'; ?>
-    <?php include_once '../templates/menu.php'; ?>
+    <?php include_once '../../templates/cabecera.php'; ?>
+    <?php include_once '../../templates/menu.php'; ?>
 
 <!-- inicia contenido -->
 <div class="content-wrapper">
 
 <!-- Main contenido -->
+
 <section class="content">
 
-  <section class="estilo">
-  <h3 class="text-center">Editar usuario</h3>
-    <form action="../includes/functions.php" method="POST">
-                            <div class="form-group">
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" name="nombre"  value="<?php echo $usuario['nombre']; ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="apellidos">Apellidos:</label>
-                                <input type="text" id="apellidos" name="apellidos"  value="<?php echo $usuario['apellidos']; ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="correo">Correo:</label>
-                                <input type="email" name="correo" id="correo"  value="<?php echo $usuario['correo']; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="tipoDocumento">Tipo de documento:</label>
-                                <select type="text" name="tipoDocumento" id="tipoDocumento" value="<?php echo $usuario['tipoDocumento']; ?>">
-                                    <option value="">Seleccione una opción</option>
-                                    <option value="CC">Cédula de ciudadanía</option>
-                                    <option value="TI">Tarjeta de identidad</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="numeroDocumento">Número de documento:</label>
-                                <input type="text" name="numeroDocumento" id="numeroDocumento" value="<?php echo $usuario['numeroDocumento']; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="contrasena">Contraseña:</label>
-                                <input type="password" name="contrasena" id="contrasena" value="<?php echo $usuario['contrasena']; ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="rol">Rol:</label>
-                                <input type="text" name="rol" id="rol" value="<?php echo $usuario['rol']; ?>">
-                            </div>
-                            <input type="hidden" name="accion" value="editar_registro">
-                            <input type="hidden" name="id" value="<?php echo $usuario['idUsuario']; ?>">
-                            <br>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-success">Editar</button>
-                                <a href="../usuariosRegistrados.php" class="btn btn-danger">Cancelar</a>
-                            </div>
-                        </div>
-                    </div>
+<section class="estilo">
+  <h2>Editar usuario</h2>
+  <hr style="border: 1px solid gray;">
+
+  <form action="../includes/functions.php" method="POST">
+  <div class="form-group">
+<label for="tipoDocumentoUsuario">Tipo de documento:</label>
+<select id="tipoDocumentoUsuario" name="tipoDocumentoUsuario" required>
+  <?php
+  $consultaTiposDocumento = "SHOW COLUMNS FROM usuarios LIKE 'tipoDocumentoUsuario'";
+  $resultadoTiposDocumento = mysqli_query($conexion, $consultaTiposDocumento);
+  $rowTiposDocumento = mysqli_fetch_assoc($resultadoTiposDocumento);
+  $enumValuesDocumento = explode(",", str_replace("'", "", substr($rowTiposDocumento['Type'], 5, (strlen($rowTiposDocumento['Type'])-6))));
+  foreach ($enumValuesDocumento as $valueDocumento) {
+    $selected = ($valueDocumento == $usuario['tipoDocumentoUsuario']) ? 'selected' : '';
+    echo "<option value='$valueDocumento' $selected>$valueDocumento</option>";
+  }
+  ?>
+</select>
 </div>
-    </form>
+
+<div class="form-group">
+  <label for="documentoUsuario">Número de documento:</label>
+  <input type="text" id="documentoUsuario" name="documentoUsuario" value="<?php echo $usuario['documentoUsuario']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="nombresUsuario">Nombre:</label>
+  <input type="text" id="nombresUsuario" name="nombresUsuario" value="<?php echo $usuario['nombresUsuario']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="apellidosUsuario">Apellidos:</label>
+  <input type="text" id="apellidosUsuario" name="apellidosUsuario" value="<?php echo $usuario['apellidosUsuario']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="telefonoUsuario">Teléfono:</label>
+  <input type="text" id="telefonoUsuario" name="telefonoUsuario" value="<?php echo $usuario['telefonoUsuario']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="correoUsuario">Correo electrónico:</label>
+  <input type="email" id="correoUsuario" name="correoUsuario" value="<?php echo $usuario['correoUsuario']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="passwordUsuario">Contraseña:</label>
+  <input type="password" name="passwordUsuario" id="passwordUsuario" value="<?php echo $usuario['passwordUsuario']; ?>" required>
+</div>
+<div class="form-group">
+<label for="estadoUsuario">Estado:</label>
+<select id="estadoUsuario" name="estadoUsuario" required>
+  <?php
+  $consultaEstados = "SHOW COLUMNS FROM usuarios LIKE 'estadoUsuario'";
+  $resultadoEstados = mysqli_query($conexion, $consultaEstados);
+  $rowEstados = mysqli_fetch_assoc($resultadoEstados);
+  $enumValues = explode(",", str_replace("'", "", substr($rowEstados['Type'], 5, (strlen($rowEstados['Type'])-6))));
+  foreach ($enumValues as $value) {
+    $selected = ($value == $usuario['estadoUsuario']) ? 'selected' : '';
+    echo "<option value='$value' $selected>$value</option>";
+  }
+  ?>
+</select>
+</div>
+<div class="form-group">
+  <label for="rol_idRol">Rol:</label>
+  <select id="rol_idRol" name="rol_idRol" required>
+    <option value="">Seleccione una opción</option>
+    <?php
+    $conexion = mysqli_connect("localhost", "root", "", "boostersystem");
+    $consultaRoles = "SELECT idRol, nombreRol FROM rol";
+    $resultadoRoles = mysqli_query($conexion, $consultaRoles);
+
+    if (mysqli_num_rows($resultadoRoles) > 0) {
+      while ($row = mysqli_fetch_assoc($resultadoRoles)) {
+        $idRol = $row['idRol'];
+        $nombreRol = $row['nombreRol'];
+        $selected = ($idRol == $usuario['rol_idRol']) ? 'selected' : '';
+        echo "<option value='$idRol' $selected>$nombreRol</option>";
+      }
+    } else {
+      echo "<option value=''>No hay roles disponibles</option>";
+    }
+    ?>
+  </select>
+</div>
+<div class="form-group">
+  <input type="hidden" name="accion" value="editar_registro">
+  <input type="hidden" name="id" value="<?php echo $usuario['idUsuario']; ?>">
+  <button type="submit" value="Guardar" name="registrar">Guardar cambios</button>
+</div>
+</form>
 </section>   
+
+
 
 </section>
 </div><!-- fin del contenido -->
 
-<?php include_once '../templates/pie.php'; ?>
+<?php include_once '../../templates/pie.php'; ?>
 
 <!-- jQuery 2.1.4 -->
 <script src="../../Layout/js/jQuery-2.1.4.min.js"></script>

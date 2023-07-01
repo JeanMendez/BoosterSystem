@@ -1,120 +1,155 @@
+<?php
+include_once 'includes/verificarAcceso.php';
+
+// Obtener los datos de estudiantes desde la base de datos
+$sqlEstudiantes = "SELECT * FROM estudiante";
+$resultEstudiantes = $conexion->query($sqlEstudiantes);
+
+// Verificar si se seleccionó un estudiante
+if (isset($_POST['estudiante_id'])) {
+    $estudianteId = $_POST['estudiante_id'];
+
+    // Obtener los datos del estudiante seleccionado desde la base de datos
+    $sqlEstudiante = "SELECT * FROM estudiante WHERE idEstudiante = '$estudianteId'";
+    $resultEstudiante = $conexion->query($sqlEstudiante);
+
+    // Verificar si se encontró al estudiante
+    if ($resultEstudiante->num_rows === 0) {
+        echo "Estudiante no encontrado";
+        exit();
+    }
+
+    // Obtener los datos de las calificaciones del estudiante desde la base de datos
+    $sqlCalificaciones = "SELECT asignaturas.nombreAsignatura, calificaciones.puntaje
+                          FROM calificaciones
+                          INNER JOIN asignaturas ON calificaciones.asignaturas_idAsignatura = asignaturas.idAsignatura
+                          WHERE calificaciones.estudiante_idEstudiante = '$estudianteId'";
+    $resultCalificaciones = $conexion->query($sqlCalificaciones);
+
+    // Obtener el nombre del estudiante
+    $rowEstudiante = $resultEstudiante->fetch_assoc();
+    $nombreEstudiante = $rowEstudiante['nombresEstudiante'];
+}
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Instituto Gerardo Valencia Cano</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.5 -->
-  <link rel="stylesheet" href="../Layout/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../Layout/css/font-awesome.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../Layout/css/AdminLTE.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boletín de Notas</title>
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/stilos2.css">
+</head>
+<body>
+    <div class="contract-bg">
+        <div class="wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="header">
+                            <img src="../img/logo.png" alt="Logo del colegio" class="logo" width="100%">
+                        </div>
+                        <hr>
+                        <h2 style="color: white; text-align: center;">Boletín de Notas</h2>
 
-  <link rel="stylesheet" href="css/stilos.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-     folder instead of downloading all of them to reduce the load. -->
-     <link rel="stylesheet" href="../Layout/css/_all-skins.min.css">
-     <link rel="apple-touch-icon" href="../Layout/img/apple-touch-icon.png">
-     <link rel="shortcut icon" href="../Imagenes/logo.png">
+                        <form method="POST" action="">
+                            <label>Estudiante:</label>
+                            <select name="estudiante_id" onchange="this.form.submit()">
+                                <option value="">Seleccione un estudiante</option>
+                                <?php while ($row = $resultEstudiantes->fetch_assoc()) : ?>
+                                    <option value="<?php echo $row['idEstudiante']; ?>" <?php if ($estudianteId == $row['idEstudiante']) echo "selected"; ?>>
+                                        <?php echo $row['nombresEstudiante']; ?>
+                                    </option>
+                                <?php endwhile; ?>
+                            </select>
+                        </form>
 
-     <script src="../js/alerta.js"></script>
+                        <?php if (isset($estudianteId)) : ?>
+                            <p>Fecha: <?php echo date('d \d\e M \d\e\l Y'); ?></p>
+                            <p>Estudiante: <strong><?php echo $nombreEstudiante; ?></strong></p>
 
-   </head>
-   <body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
-    
-    <?php include_once './templates/cabecera.php'; ?>
-    <?php include_once './templates/menu.php'; ?>
+                            <?php
+                            // Obtener los datos de las calificaciones en un arreglo
+                            $calificaciones = array();
+                            while ($row = $resultCalificaciones->fetch_assoc()) {
+                                $calificaciones[] = $row;
+                            }
+                            ?>
 
-<div class="content-wrapper">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Asignatura</th>
+                                        <th scope="col">Nota</th>
+                                        <th scope="col">Desempeño</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($calificaciones as $calificacion) : ?>
+                                        <tr>
+                                            <td><?php echo $calificacion['nombreAsignatura']; ?></td>
+                                            <td><?php echo $calificacion['puntaje']; ?></td>
+                                            <td><?php echo determinarDesempenio($calificacion['puntaje']); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
 
-        <!-- Main content -->
-        <section class="content">
-
-            <section class="estilo">
-                <h2>Boletin</h2>
-                <hr style="border: 1px solid gray;">
-
-                <div class="filtros">
-                  <label for="input-nombre"></label>
-                  <input type="text" id="input-nombre" placeholder="N° identidad">
-                  <select id="select-ano">
-                    <option value="">Año lectivo</option>
-                    <option value="2020-2021">2020-2021</option>
-                    <option value="2021-2022">2021-2022</option>
-                    <option value="2022-2023">2022-2023</option>
-                   </select>
-                  <button id="btn-buscar">Buscar</button>
+                            <p>Observaciones:</p>
+                            <ul style="font-size: 14px; color: white;">
+                                <?php echo generarObservaciones($calificaciones); ?>
+                            </ul>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <div class="tabla">
-                  <h3>Alumno</h3>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Número documento</th>
-                        <th>Curso</th>
-                        <th>Periodo</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Juan</td>
-                        <td>Pérez</td>
-                        <td>123456789</td>
-                        <td>Segundo</td>
-                        <td>2</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="tabla">
-                  <h3>Tabla de notas por materia</h3>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Materia</th>
-                        <th>Nota 1°</th>
-                        <th>Nota 2°</th>
-                        <th>Nota 3°</th>
-                        <th>Nota 4°</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Matemáticas</td>
-                        <td>4.5</td>
-                        <td>4.5</td>
-                        <td>4.5</td>
-                        <td>4.5</td>
-                      </tr>
-                      <tr>
-                        <td>Ciencias</td>
-                        <td>3.0</td>
-                        <td>4.5</td>
-                        <td>4.5</td>
-                        <td>4.5</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <button id="btn-buscar">Descargar boletin</button>
-              </section>        
-  </section><!-- /.content -->
-</div><!-- /.content-wrapper -->
+            </div>
+            <a name="" id="" class="btn btn-primary" href="../inicio.php" role="button">Salir</a>
+        </div>
+    </div>
 
-<?php include_once './templates/pie.php'; ?>
+    <?php
+    function determinarDesempenio($puntaje)
+    {
+        if ($puntaje >= 1 && $puntaje <= 2.9) {
+            return "Mala";
+        } elseif ($puntaje >= 3 && $puntaje <= 3.9) {
+            return "Regular";
+        } elseif ($puntaje >= 4 && $puntaje <= 5) {
+            return "Excelente";
+        }
+    }
 
-<!-- jQuery 2.1.4 -->
-<script src="../Layout/js/jQuery-2.1.4.min.js"></script>
-<!-- Bootstrap 3.3.5 -->
-<script src="../Layout/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../Layout/js/app.min.js"></script>
+    function generarObservaciones($calificaciones)
+    {
+        $totalPuntajes = 0;
+        $totalAsignaturas = count($calificaciones);
 
+        foreach ($calificaciones as $calificacion) {
+            $puntaje = $calificacion['puntaje'];
+            $totalPuntajes += $puntaje;
+        }
+
+        $observaciones = "";
+
+        if ($totalAsignaturas > 0) {
+            $promedio = $totalPuntajes / $totalAsignaturas;
+
+            if ($promedio >= 1 && $promedio <= 2.9) {
+                $observaciones = "El estudiante no cumplió con lo propuesto en clase. Debe mejorar en todas las asignaturas.";
+            } elseif ($promedio >= 3 && $promedio <= 3.9) {
+                $observaciones = "El estudiante estuvo ahí, pero debe mejorar en algunos aspectos. Puede lograr mejores resultados en todas las asignaturas.";
+            } elseif ($promedio >= 4 && $promedio <= 5) {
+                $observaciones = "El estudiante cumple con todo. ¡Sigue así en todas las asignaturas!";
+            }
+        } else {
+            $observaciones = "No se encontraron calificaciones para este estudiante.";
+        }
+
+        return $observaciones;
+    }
+    ?>
 </body>
 </html>

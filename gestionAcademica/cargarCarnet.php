@@ -1,3 +1,4 @@
+<?php include_once 'includes/verificarAcceso.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,8 +27,8 @@
    <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
     
-    <?php include_once './templates/cabecera.php'; ?>
-    <?php include_once './templates/menu.php'; ?>
+    <?php include_once '../templates/cabecera.php'; ?>
+    <?php include_once '../templates/menu.php'; ?>
 
 <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
@@ -102,7 +103,7 @@
   </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 
-<?php include_once './templates/pie.php'; ?>
+<?php include_once '../templates/pie.php'; ?>
 
 <!-- jQuery 2.1.4 -->
 <script src="../Layout/js/jQuery-2.1.4.min.js"></script>
