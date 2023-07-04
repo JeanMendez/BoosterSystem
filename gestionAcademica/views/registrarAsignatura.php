@@ -1,4 +1,4 @@
-<?php include_once 'includes/verificarAcceso.php'; ?>
+<?php include_once '../includes/verificarAcceso.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>

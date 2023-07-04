@@ -13,7 +13,7 @@ $result = $conexion->query($sql);
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Instituto Gerardo Valencia Cano</title>
+  <title>Consultar Notas</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
@@ -28,7 +28,7 @@ $result = $conexion->query($sql);
      folder instead of downloading all of them to reduce the load. -->
      <link rel="stylesheet" href="../Layout/css/_all-skins.min.css">
      <link rel="apple-touch-icon" href="../Layout/img/apple-touch-icon.png">
-     <link rel="shortcut icon" href="../Imagenes/logo.png">
+     <link rel="shortcut icon" href="../img/logomini.png">
 
      <script src="../js/alerta.js"></script>
 

@@ -120,7 +120,7 @@
             </tbody>
           </table>
         </div>
-
+        <a name="" id="" class="btn btn-primary" href="../../inicio.php" role="button">Salir</a>
       </div>
 
     </div>

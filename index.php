@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Colegio</title>
+    <title>Instituto Gerardo Valencia Cano</title>
     <script src="https://kit.fontawesome.com/4730e8f7f3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="css/stilos.css">
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/63de662e55.js" crossorigin="anonymous"></script>
-</head>
+    <link rel="shortcut icon" href="img/logomini.png">
+  </head>
     <body>
     <header>
       <div class="logo-container">

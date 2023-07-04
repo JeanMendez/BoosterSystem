@@ -5,9 +5,9 @@ $url_base="http://localhost/boostersystem/";
     <!-- Logo -->
     <a href="../inicio.php" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><img src="#" alt="" width="40px"></span>
+        <span class="logo-mini"><img src="<?php echo $url_base; ?>img/logomini.png"  alt="" width="40px"></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><img src="../img/logo.png" alt="" height="50px"></span>
+        <span class="logo-lg"><img src="<?php echo $url_base; ?>img/logo.png" alt="" height="50px"></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -27,16 +27,16 @@ $url_base="http://localhost/boostersystem/";
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <small class="bg-red">Online</small>
                         <span class="hidden-xs"><?php echo $nombresUsuario." ".$apellidosUsuario?></span>
-                        <img src="../img/perfil.jpg" class="user-image" alt="Imagen de perfil">
+                        <img src="<?php echo $url_base; ?>img/perfil.jpg" class="user-image" alt="Imagen de perfil">
                     </a>
 
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header" style="background-color: #003366;">
-                            <img src="../img/perfil.jpg" class="img-circle" alt="Imagen de perfil">
+                            <img src="<?php echo $url_base; ?>img/perfil.jpg" class="img-circle" alt="Imagen de perfil">
                             <p>
                                 <?php echo $nombresUsuario." ".$apellidosUsuario?> - <?php echo $rol_idRol?>
-                                <small>Desde Marzo 2023</small>
+                                <small>Bienvenid@</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -44,7 +44,7 @@ $url_base="http://localhost/boostersystem/";
                         <!-- Menu Footer-->
                         <li class="user-footer" style="background-color: #003b75;">
                             <div class="pull-left">
-                                <a href="<?php echo $url_base; ?>404/error404.php" class="btn btn-default btn-flat">Perfil</a>
+                                <a href="<?php echo $url_base; ?>404/errormodulos.php" class="btn btn-default btn-flat">Perfil</a>
                             </div>
                             <div class="pull-right">
                                 <a href="<?php echo $url_base; ?>login/cerrarSesion.php" class="btn btn-default btn-flat">Cerrar sesión</a>

@@ -1,5 +1,5 @@
 function redireccionar() {
-    window.location.href = "../"; // Reemplaza "http://www.example.com" con la URL de la página a la que deseas redireccionar.
+    window.location.href = "../"; 
   }  
 
 function drawVisor() {

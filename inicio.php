@@ -40,12 +40,13 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
   <link rel="stylesheet" href="Layout/css/font-awesome.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="Layout/css/AdminLTE.min.css">
+  
 
     <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
      <link rel="stylesheet" href="Layout/css/_all-skins.min.css">
      <link rel="apple-touch-icon" href="Layout/img/apple-touch-icon.png">
-     <link rel="shortcut icon" href="Imagenes/logo.png">
+     <link rel="shortcut icon" href="img/logomini.png">
 
      <script src="js/alerta.js"></script>
 
@@ -61,9 +62,26 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
 
 <!-- Main contenido -->
 <section class="content">
+<h3>  Querido usuario</h3>
+                    <div class="container-fluid-1 pt-5">
+      <div class="estilo">
+        <div class="text-center">
+          <h1>Bienvenido a su institución Gerardo Valencia Cano</h1>
+        <br>
+        <div>
+          <img src="img/valenciacano.jpg" alt="" width="50%">  
+        </div>
+      </p>Somos una institución dedicada a la formación de jóvenes líderes, comprometidos con el desarrollo sostenible y la construcción de una sociedad más justa y equitativa.
+      </p>Nuestra misión es proporcionar una educación integral de alta calidad, que fomente el pensamiento crítico, la creatividad y la innovación.
+      </p>A lo largo de nuestra trayectoria, hemos formado a miles de profesionales destacados en diversas áreas, 
+      </p>que han contribuido al desarrollo de sus comunidades y del país en general.
+      </p>Nuestro compromiso con la excelencia académica y la formación de ciudadanos responsables nos impulsa a seguir creciendo y mejorando día a día.
+      </p>Únete a nuestra comunidad educativa y sé parte del cambio que queremos ver en el mundo.
+      </div>
+    </div>
+                
 
       <?php
-         echo "<a href='login/cerrarSesion.php'>Cerrar sesión</a>";
 }else{
     header('Location: login');
 }

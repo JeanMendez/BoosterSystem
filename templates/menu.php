@@ -290,7 +290,7 @@ if ($rol_idRol == 1) { // Estudiante
                     <i class="fa fa-angle-left pull-right"></i>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="<?php echo $url_base; ?>admisiones/asignarCitas.php"><i class="fa fa-arrow-right"></i>Asignar cita</a></li>
+                    <li><a href="<?php echo $url_base; ?>admisiones/consultarPersonasconCitas.php"><i class="fa fa-arrow-right"></i>Asignar cita</a></li>
                     <li><a href="<?php echo $url_base; ?>admisiones/cargarResultadosPrueba.php"><i class="fa fa-arrow-right"></i>Cargar resultados</a></li>
                     <li><a href="<?php echo $url_base; ?>admisiones/consultarResultadosPrueba.php"><i class="fa fa-arrow-right"></i>Consultar resultados</a></li>
                   </ul>
@@ -410,7 +410,7 @@ if ($rol_idRol == 1) { // Estudiante
                     <i class="fa fa-angle-left pull-right"></i>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="<?php echo $url_base; ?>admisiones/asignarCitas.php"><i class="fa fa-arrow-right"></i>Asignar cita</a></li>
+                  <li><a href="<?php echo $url_base; ?>admisiones/consultarPersonasconCitas.php"><i class="fa fa-arrow-right"></i>Asignar cita</a></li>
                     <li><a href="<?php echo $url_base; ?>admisiones/cargarResultadosPrueba.php"><i class="fa fa-arrow-right"></i>Cargar resultados</a></li>
                     <li><a href="<?php echo $url_base; ?>admisiones/consultarResultadosPrueba.php"><i class="fa fa-arrow-right"></i>Consultar resultados</a></li>
                   </ul>
